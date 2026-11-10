@@ -1,5 +1,7 @@
 # RSS Pal for DeepSeek Harness
 
+**简体中文** · [English](README.en.md)
+
 **DSH 内的本地 RSS 阅读室：订阅、全文搜索、批量已读、手动 AI 总结与原生伴读。**
 
 A local-first RSS/Atom reader for DeepSeek Harness, with full-text search, on-demand AI summaries and a native reading companion.
@@ -79,13 +81,13 @@ Agent 阅读不会计入人类阅读时长。总结工具只在用户明确要�
 
 ## 开发与测试
 
+先安装开发依赖：
+
 ```sh
 npm ci --include=dev
-npm run check
-npm pack
 ```
 
-`npm run check` 执行类型检查、Host / Client 构建与全部回归测试。宿主 `@deepseek-ai` 依赖由 DSH 提供，开发时还需在当前项目安装与目标 DSH 同版的 `dsh-tools`、`dsh-llm`、`dsh-home-paths`、`dsh-typert-protocol` 四个包：
+宿主 `@deepseek-ai` 依赖由 DSH 提供，开发时还需在当前项目安装与目标 DSH 同版的 `dsh-tools`、`dsh-llm`、`dsh-home-paths`、`dsh-typert-protocol` 四个包：
 
 ```sh
 npm install --include=dev --save-dev --package-lock=false \
@@ -94,7 +96,10 @@ npm install --include=dev --save-dev --package-lock=false \
   @deepseek-ai/dsh-home-paths@0.2.1-rc.5 \
   @deepseek-ai/dsh-typert-protocol@0.2.1-rc.5
 npm run check
+npm pack
 ```
+
+`npm run check` 执行类型检查、Host / Client 构建与全部回归测试。
 
 Host 入口为 Cordis `RssPalService` 插件类；Web Client 在 `src/client/index.tsx` 导出 `apply(ctx)`，注册 RSS Pal 面板、Remote 与原生伴读。客户端包含 KaTeX 样式与字体，无需额外公式字体服务。
 
