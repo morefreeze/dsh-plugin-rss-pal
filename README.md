@@ -88,7 +88,7 @@ npm pack
 `npm run check` 执行类型检查、Host / Client 构建与全部回归测试。宿主 `@deepseek-ai` 依赖由 DSH 提供，开发时还需在当前项目安装与目标 DSH 同版的 `dsh-tools`、`dsh-llm`、`dsh-home-paths`、`dsh-typert-protocol` 四个包：
 
 ```sh
-npm install --no-save --package-lock=false \
+npm install --include=dev --save-dev --package-lock=false \
   @deepseek-ai/dsh-tools@0.2.1-rc.5 \
   @deepseek-ai/dsh-llm@0.2.1-rc.5 \
   @deepseek-ai/dsh-home-paths@0.2.1-rc.5 \
