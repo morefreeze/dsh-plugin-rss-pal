@@ -1,0 +1,12 @@
+{
+  "name":"rss-pal-dsh","version":"0.1.0","private":false,"author":"MoreFreeze","repository":{"type":"git","url":"git+https://github.com/morefreeze/dsh-plugin-rss-pal.git"},"homepage":"https://github.com/morefreeze/dsh-plugin-rss-pal#readme","bugs":{"url":"https://github.com/morefreeze/dsh-plugin-rss-pal/issues"},"keywords":["dsh-plugin","deepseek-harness","rss","atom","reader","knowledge","local-first"],"type":"module","description":"Independent local RSS Pal reader and AI companion for DSH","license":"MIT","main":"lib/index.js",
+  "exports":{".":"./lib/index.js","./client":"./lib/client.js","./package.json":"./package.json"},
+  "files":["lib","cordis.patch.yml","README.md","LICENSE"],
+  "scripts":{"build":"node build.mjs","test":"NODE_ENV=test tsx --test tests/*.test.ts tests/*.test.tsx","typecheck":"tsc --noEmit","check":"npm run typecheck && npm run build && npm test"},
+  "engines":{"node":">=22.19.0","dsh":"0.2.1-rc.5 || 0.2.2-rc.1"},
+  "dsh":{"bundle":{"patch":"./cordis.patch.yml"},"meta":{"title":"RSS Pal","description":"本地RSS阅读、全文搜索、手动AI总结与原生伴读"},"client":{"platform":"web","inject":["@deepseek-ai/dsh-api-remotes","@deepseek-ai/dsh-api-gateway","@deepseek-ai/dsh-client-connection","@deepseek-ai/dsh-client-ui-layout","@deepseek-ai/dsh-client-ui-sidebar"]}},
+  "peerDependencies":{"@deepseek-ai/dsh-typert-protocol":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-tools":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-llm":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-home-paths":"0.2.1-rc.5 || 0.2.2-rc.1"},
+  "peerDependenciesMeta":{"@deepseek-ai/dsh-typert-protocol":{"optional":true},"@deepseek-ai/dsh-tools":{"optional":true},"@deepseek-ai/dsh-llm":{"optional":true},"@deepseek-ai/dsh-home-paths":{"optional":true}},
+  "dependencies":{"better-sqlite3":"^12.4.1","fast-xml-parser":"^5.3.0","jsdom":"^26.1.0","@mozilla/readability":"^0.6.0","dompurify":"^3.2.7"},
+  "devDependencies":{"esbuild":"^0.28.1","typescript":"^5.9.3","tsx":"^4.20.6","react":"^18.3.1","react-dom":"^18.3.1","@types/react":"^18.3.0","@types/react-dom":"^18.3.0","@types/node":"^22.0.0","@types/better-sqlite3":"^7.6.13","@types/jsdom":"^21.1.7","@testing-library/react":"^16.3.0","lucide-react":"^0.468.0","react-markdown":"^9.1.0","remark-gfm":"^4.0.1","rehype-highlight":"^7.0.2","remark-math":"^6.0.0","rehype-katex":"^7.0.1"}
+}

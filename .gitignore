@@ -1,0 +1,15 @@
+node_modules/
+artifacts/
+src/generated/
+*.tgz
+*.sqlite*
+.DS_Store
+.taste-skill/
+# Local implementation plans and runtime records include private environment details.
+docs/superpowers/
+docs/verification.md
+docs/summary-model-verification.md
+docs/read-menu-verification.md
+.env
+.env.*
+*.log

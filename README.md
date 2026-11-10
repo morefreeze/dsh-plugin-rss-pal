@@ -1,0 +1,107 @@
+# RSS Pal for DeepSeek Harness
+
+**DSH 内的本地 RSS 阅读室：订阅、全文搜索、批量已读、手动 AI 总结与原生伴读。**
+
+A local-first RSS/Atom reader for DeepSeek Harness, with full-text search, on-demand AI summaries and a native reading companion.
+
+- 仓库：<https://github.com/morefreeze/dsh-plugin-rss-pal>
+- 插件包名：`rss-pal-dsh` · 版本：`0.1.0`
+- 市场能力分类：**Data & Knowledge (knowledge) / 数据与知识**
+- 许可证：[MIT](LICENSE)
+- 社区插件，与 DeepSeek AI 官方无隶属关系。
+
+## 功能
+
+- RSS / Atom 订阅预览、分组、暂停、定时与手动刷新，OPML 导入导出。
+- 网页全文提取与重抓、中文全文搜索、分页、收藏、标签、点赞与不喜欢。
+- 每篇文章的三点菜单：标记已读、标记这篇及以上 / 以下已读。范围包含本篇，按当前订阅、筛选、搜索、标签跨分页计算，并保留附近列表锚点。
+- 前台活跃阅读时长、次数与进度；隐藏窗口、失焦及连续 120 秒无操作时暂停计时。
+- 手动生成简短摘要和详细分析，支持模板、流式后台任务、结果缓存与正文变化标记。
+- 总结模型独立选择并记忆，默认跟随宿主；推理强度按宿主真实模型能力显示，不修改宿主全局默认模型。
+- 文章与选段接入 DSH 原生伴读，使用原生模型选择、输入框和会话。
+- URL 网摘、Markdown 导出、本地备份恢复、任务重试 / 取消及 Agent 工具。
+
+**只有用户点击生成或明确调用总结工具时才调用模型。** 打开文章、刷新订阅和搜索不自动生成总结。普通阅读无需模型账号。
+
+## 截图
+
+![手机文章列表与批量已读菜单](docs/screenshots/read-menu-mobile.png)
+
+实际 DSH Web 手机宽度截图，展示三点菜单；未包含宿主会话列表或账号信息。
+
+## 安装
+
+### 从 GitHub 安装（当前发布渠道）
+
+```sh
+dsh plugin --profile web add github:morefreeze/dsh-plugin-rss-pal
+```
+
+仓库包含预构建的 `lib/index.js` 和 `lib/client.js`，安装时无需编译插件源码。`better-sqlite3` 是原生依赖；安装器提示构建审批时，只为该依赖允许原生构建。安装完成后在插件管理中启用 **RSS Pal**，刷新页面；新增 Host 模块需重载对应插件或宿主。
+
+### 发布包安装
+
+从 [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases) 下载 `rss-pal-dsh-0.1.0.tgz`：
+
+```sh
+dsh plugin --profile web add ./rss-pal-dsh-0.1.0.tgz
+```
+
+npm 发布状态：**尚未发布**。市场官网支持 GitHub 源码收录；DSH 内插件中心的一键安装条目需要 npm 发布并通过市场核验。发布后包名将保持 `rss-pal-dsh`。
+
+## 兼容与运行要求
+
+| 项目 | 要求 / 验证范围 |
+| --- | --- |
+| DSH profile | `web` |
+| DSH 版本声明 | `0.2.1-rc.5`、`0.2.2-rc.1` |
+| 实机验收 | macOS、DeepSeek Harness `0.2.1-rc.5` Web |
+| Node.js | `>=22.19.0`；使用的 DSH 版本可能要求更高版本 |
+| 数据库 | 本地 SQLite / `better-sqlite3` 原生模块 |
+| 其他平台 | Windows、Linux、Desktop 和 `0.2.2-rc.1` 尚未实机验收 |
+
+## 权限、外部服务与数据
+
+- Host 读写 Harness home 下 `storages/rss-pal-dsh/` 的 SQLite 资料库与恢复前备份；卸载插件保留阅读数据。
+- 网络访问用户添加的 RSS / Atom 源、网页及正文中的远程图片；全文提取取决于目标网页的内容和访问条件。
+- 手动总结将文章内容发送到用户选择的宿主模型；伴读使用宿主会话和模型配置，模型服务可能计费。
+- 不新增账号系统、独立模型凭据、遥测或云端同步；无需原 RSS Pal 服务、Go、PostgreSQL 或 Docker。
+- 默认 60 分钟刷新，设为 `0` 可关闭；仅在宿主运行时执行，暂停订阅保留文章。
+- 备份包含订阅、正文、阅读历史和总结，不包含宿主模型凭据。恢复校验输入并事务替换，保留恢复前备份；运行任务需先结束或取消。
+
+当前版本不含兴趣推荐、日报周报、音视频字幕、PDF / OCR、公开分享或浏览器扩展。
+
+## Agent 工具
+
+`rsspal_list_feeds`、`rsspal_list_articles`、`rsspal_read_article`、`rsspal_search`、`rsspal_subscribe`、`rsspal_refresh`、`rsspal_capture`、`rsspal_summarize`、`rsspal_jobs`、`rsspal_set_state`、`rsspal_export_markdown`。
+
+Agent 阅读不会计入人类阅读时长。总结工具只在用户明确要求时调用。
+
+## 开发与测试
+
+```sh
+npm ci --include=dev
+npm run check
+npm pack
+```
+
+`npm run check` 执行类型检查、Host / Client 构建与全部回归测试。宿主 `@deepseek-ai` 依赖由 DSH 提供，开发时还需在当前项目安装与目标 DSH 同版的 `dsh-tools`、`dsh-llm`、`dsh-home-paths`、`dsh-typert-protocol` 四个包：
+
+```sh
+npm install --no-save --package-lock=false \
+  @deepseek-ai/dsh-tools@0.2.1-rc.5 \
+  @deepseek-ai/dsh-llm@0.2.1-rc.5 \
+  @deepseek-ai/dsh-home-paths@0.2.1-rc.5 \
+  @deepseek-ai/dsh-typert-protocol@0.2.1-rc.5
+npm run check
+```
+
+Host 入口为 Cordis `RssPalService` 插件类；Web Client 在 `src/client/index.tsx` 导出 `apply(ctx)`，注册 RSS Pal 面板、Remote 与原生伴读。客户端包含 KaTeX 样式与字体，无需额外公式字体服务。
+
+## 验证
+
+当前回归：**88 项通过**，包括事务范围已读、筛选隔离、待写入期间翻页 / 切筛选竞态、阅读追踪、手动总结与模型选择。已在真实 DSH Web 验证桌面和手机布局、单篇已读 RPC 与原生伴读。
+
+## 致谢
+
+产品灵感来自 RSS Pal；正文提取与清洗使用 Mozilla Readability、DOMPurify 等开源项目。依赖各自遵循其许可证。
