@@ -5,7 +5,7 @@
 **A local-first reading room inside DSH: RSS subscriptions, full-text search, bulk read marking, on-demand AI summaries and a native reading companion.**
 
 - Repository: <https://github.com/morefreeze/dsh-plugin-rss-pal>
-- Plugin package: `rss-pal-dsh` · Version: `0.1.0`
+- Plugin package: `rss-pal-dsh` · Version: `0.1.1`
 - Marketplace category: **Data & Knowledge (knowledge)**
 - License: [MIT](LICENSE)
 - A community plugin, not affiliated with DeepSeek AI.
@@ -41,15 +41,15 @@ The repository includes prebuilt `lib/index.js` and `lib/client.js`, so installi
 
 ### Install a release package
 
-Download `rss-pal-dsh-0.1.0.tgz` from [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases):
+Download `rss-pal-dsh-0.1.1.tgz` from [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases):
 
 ```sh
-dsh plugin --profile web add ./rss-pal-dsh-0.1.0.tgz
+dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 ```
 
 ### Install from npm
 
-`rss-pal-dsh@0.1.0` is published on [npm](https://www.npmjs.com/package/rss-pal-dsh):
+`rss-pal-dsh@0.1.1` is published on [npm](https://www.npmjs.com/package/rss-pal-dsh):
 
 ```sh
 dsh plugin --profile web add rss-pal-dsh

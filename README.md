@@ -7,7 +7,7 @@
 A local-first RSS/Atom reader for DeepSeek Harness, with full-text search, on-demand AI summaries and a native reading companion.
 
 - 仓库：<https://github.com/morefreeze/dsh-plugin-rss-pal>
-- 插件包名：`rss-pal-dsh` · 版本：`0.1.0`
+- 插件包名：`rss-pal-dsh` · 版本：`0.1.1`
 - 市场能力分类：**Data & Knowledge (knowledge) / 数据与知识**
 - 许可证：[MIT](LICENSE)
 - 社区插件，与 DeepSeek AI 官方无隶属关系。
@@ -43,15 +43,15 @@ dsh plugin --profile web add github:morefreeze/dsh-plugin-rss-pal
 
 ### 发布包安装
 
-从 [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases) 下载 `rss-pal-dsh-0.1.0.tgz`：
+从 [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases) 下载 `rss-pal-dsh-0.1.1.tgz`：
 
 ```sh
-dsh plugin --profile web add ./rss-pal-dsh-0.1.0.tgz
+dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 ```
 
 ### 从 npm 安装
 
-`rss-pal-dsh@0.1.0` 已发布到 [npm](https://www.npmjs.com/package/rss-pal-dsh)：
+`rss-pal-dsh@0.1.1` 已发布到 [npm](https://www.npmjs.com/package/rss-pal-dsh)：
 
 ```sh
 dsh plugin --profile web add rss-pal-dsh
