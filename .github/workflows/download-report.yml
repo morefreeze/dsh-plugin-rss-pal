@@ -1,0 +1,55 @@
+name: Download report
+
+# No push/pull_request trigger: report commits never trigger another report run.
+on:
+  schedule:
+    - cron: '23 7 * * *'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: download-report-${{ github.repository }}
+  cancel-in-progress: false
+
+jobs:
+  report:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Check out default branch
+        uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.repository.default_branch }}
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: '22'
+      - name: Test standalone report
+        run: node --test tests/download-report.test.mjs
+      - name: Collect public aggregate downloads
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: node scripts/download-report.mjs
+      - name: Commit report files only
+        shell: bash
+        run: |
+          set -euo pipefail
+          git add -- docs/reports/downloads.json docs/reports/downloads.md ':(glob)docs/reports/history/*.json'
+          if git diff --cached --quiet; then
+            echo 'UTC snapshot already recorded; no report changes.'
+            exit 0
+          fi
+          # Fail closed if a future step ever stages a file outside the report allowlist.
+          while IFS= read -r path; do
+            case "$path" in
+              docs/reports/downloads.json|docs/reports/downloads.md) ;;
+              docs/reports/history/????-??-??.json) ;;
+              *) echo 'Unexpected staged path; stopping report commit.'; exit 1 ;;
+            esac
+          done < <(git diff --cached --name-only)
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          git commit -m 'chore: update download report [skip ci]'
+          git push origin "HEAD:${{ github.event.repository.default_branch }}"

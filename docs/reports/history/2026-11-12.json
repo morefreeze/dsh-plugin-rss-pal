@@ -1,0 +1,155 @@
+{
+  "schemaVersion": 1,
+  "snapshotDay": "2026-11-12",
+  "collectedAt": "2026-11-12T12:07:22.495Z",
+  "package": "rss-pal-dsh",
+  "repository": "morefreeze/dsh-plugin-rss-pal",
+  "window": {
+    "start": "2026-10-13",
+    "end": "2026-11-11",
+    "days": 30
+  },
+  "interpretation": {
+    "downloadsAreNotUsers": true,
+    "channelsMustNotBeAdded": true,
+    "releaseCountsAreCumulative": true,
+    "historySnapshotsMustNotBeSummed": true,
+    "telemetry": "none; public aggregate APIs queried only by maintainer script or CI"
+  },
+  "npm": {
+    "status": "ok",
+    "totalDownloads": 339,
+    "daily": [
+      {
+        "day": "2026-10-13",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-14",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-15",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-16",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-17",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-18",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-19",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-20",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-21",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-22",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-23",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-24",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-25",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-26",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-27",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-28",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-29",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-30",
+        "downloads": 0
+      },
+      {
+        "day": "2026-10-31",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-01",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-02",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-03",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-04",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-05",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-06",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-07",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-08",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-09",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-10",
+        "downloads": 0
+      },
+      {
+        "day": "2026-11-11",
+        "downloads": 339
+      }
+    ]
+  },
+  "github": {
+    "repository": {
+      "status": "unknown",
+      "error": "http_403"
+    },
+    "releases": {
+      "status": "unknown",
+      "error": "http_403"
+    }
+  }
+}

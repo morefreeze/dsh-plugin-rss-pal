@@ -49,7 +49,25 @@ dsh plugin --profile web add github:morefreeze/dsh-plugin-rss-pal
 dsh plugin --profile web add ./rss-pal-dsh-0.1.0.tgz
 ```
 
-npm 发布状态：**尚未发布**。市场官网支持 GitHub 源码收录；DSH 内插件中心的一键安装条目需要 npm 发布并通过市场核验。发布后包名将保持 `rss-pal-dsh`。
+### 从 npm 安装
+
+`rss-pal-dsh@0.1.0` 已发布到 [npm](https://www.npmjs.com/package/rss-pal-dsh)：
+
+```sh
+dsh plugin --profile web add rss-pal-dsh
+```
+
+市场的收录及一键安装状态取决于各市场核验。GitHub main 中的新功能可能先于 npm 发布；上方 GitHub 安装方式可取得最新源码及预构建产物。
+
+## 反馈与公开下载报表
+
+插件侧栏的 **反馈与建议** 提供[问题反馈](https://github.com/morefreeze/dsh-plugin-rss-pal/issues/new?template=bug-report.yml)、[功能建议](https://github.com/morefreeze/dsh-plugin-rss-pal/issues/new?template=feature-request.yml)与[已有反馈](https://github.com/morefreeze/dsh-plugin-rss-pal/issues)。请注明插件/DSH 版本、系统与复现步骤，并对截图和日志脱敏；插件不会自动上传诊断、订阅、文章或聊天。
+
+[下载统计报表](docs/reports/downloads.md)展示最近 30 个完整 UTC 日的 npm 下载趋势、GitHub Release 文件下载及 Star/Fork/Issue。GitHub Actions 每天生成，也支持手动触发；来源失败会标明未知，不填成 0。**下载次数不代表独立用户或活跃人数，npm 与 Release 不相加当人数。** 仅仓库侧脚本访问公开统计接口，用户安装的插件保持无遥测。
+
+```sh
+node scripts/download-report.mjs
+```
 
 ## 兼容与运行要求
 

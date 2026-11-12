@@ -1,8 +1,8 @@
 {
   "name":"rss-pal-dsh","version":"0.1.0","private":false,"author":"MoreFreeze","repository":{"type":"git","url":"git+https://github.com/morefreeze/dsh-plugin-rss-pal.git"},"homepage":"https://github.com/morefreeze/dsh-plugin-rss-pal#readme","bugs":{"url":"https://github.com/morefreeze/dsh-plugin-rss-pal/issues"},"keywords":["dsh-plugin","deepseek-harness","rss","atom","reader","knowledge","local-first"],"type":"module","description":"Independent local RSS Pal reader and AI companion for DSH","license":"MIT","main":"lib/index.js",
   "exports":{".":"./lib/index.js","./client":"./lib/client.js","./package.json":"./package.json"},
-  "files":["lib","cordis.patch.yml","README.md","LICENSE"],
-  "scripts":{"build":"node build.mjs","test":"NODE_ENV=test tsx --test tests/*.test.ts tests/*.test.tsx","typecheck":"tsc --noEmit","check":"npm run typecheck && npm run build && npm test"},
+  "files":["lib","cordis.patch.yml","README.md","README.en.md","docs/screenshots","LICENSE"],
+  "scripts":{"report:downloads":"node scripts/download-report.mjs","test:report":"node --test tests/download-report.test.mjs","build":"node build.mjs","test":"NODE_ENV=test tsx --test tests/*.test.ts tests/*.test.tsx","typecheck":"tsc --noEmit","check":"npm run typecheck && npm run build && npm test"},
   "engines":{"node":">=22.19.0","dsh":"0.2.1-rc.5 || 0.2.2-rc.1"},
   "dsh":{"bundle":{"patch":"./cordis.patch.yml"},"meta":{"title":"RSS Pal","description":"本地RSS阅读、全文搜索、手动AI总结与原生伴读"},"client":{"platform":"web","inject":["@deepseek-ai/dsh-api-remotes","@deepseek-ai/dsh-api-gateway","@deepseek-ai/dsh-client-connection","@deepseek-ai/dsh-client-ui-layout","@deepseek-ai/dsh-client-ui-sidebar"]}},
   "peerDependencies":{"@deepseek-ai/dsh-typert-protocol":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-tools":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-llm":"0.2.1-rc.5 || 0.2.2-rc.1","@deepseek-ai/dsh-home-paths":"0.2.1-rc.5 || 0.2.2-rc.1"},

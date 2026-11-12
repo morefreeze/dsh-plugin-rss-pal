@@ -1,0 +1,53 @@
+name: 问题反馈 / Bug report
+description: 报告安装或使用问题 / Report installation or usage problems
+title: "[Bug] "
+body:
+  - type: markdown
+    attributes:
+      value: |
+        请先搜索已有 Issue。仅提交相关、脱敏的信息，不要上传订阅库、文章正文、模型凭据或完整备份。
+        Search existing issues first. Remove private data, credentials and article content from screenshots/logs.
+  - type: input
+    id: version
+    attributes:
+      label: 插件版本 / Plugin version
+      placeholder: rss-pal-dsh 0.1.0
+    validations:
+      required: true
+  - type: input
+    id: dsh-version
+    attributes:
+      label: DSH 版本与 Profile / DSH version and profile
+      placeholder: 0.2.1-rc.5, web
+    validations:
+      required: true
+  - type: input
+    id: environment
+    attributes:
+      label: 系统、Node 与浏览器 / OS, Node and browser
+      placeholder: macOS, Node 22.19.0, Chrome
+    validations:
+      required: true
+  - type: dropdown
+    id: installation
+    attributes:
+      label: 安装来源 / Installation source
+      options:
+        - npm
+        - GitHub
+        - Release tarball
+        - Local source
+    validations:
+      required: true
+  - type: textarea
+    id: steps
+    attributes:
+      label: 复现步骤 / Steps to reproduce
+      description: 描述操作、预期结果和实际结果 / Include steps, expected and actual behavior.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: 脱敏截图或日志 / Redacted screenshots or logs
+      description: 可选；不要包含 token、邮箱、私人源 URL、文章内容或数据库备份 / Optional; omit secrets and private content.

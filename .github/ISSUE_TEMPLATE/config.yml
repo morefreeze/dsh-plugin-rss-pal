@@ -1,0 +1,5 @@
+blank_issues_enabled: true
+contact_links:
+  - name: 使用说明 / Documentation
+    url: https://github.com/morefreeze/dsh-plugin-rss-pal#readme
+    about: 安装、兼容性和数据说明 / Installation, compatibility and data handling.

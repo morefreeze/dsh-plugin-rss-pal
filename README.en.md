@@ -47,7 +47,25 @@ Download `rss-pal-dsh-0.1.0.tgz` from [GitHub Releases](https://github.com/moref
 dsh plugin --profile web add ./rss-pal-dsh-0.1.0.tgz
 ```
 
-npm publication status: **not yet published**. Some marketplace websites accept GitHub-source listings; npm-backed one-click entries in the DSH plugin center require npm publication and marketplace verification. The package name will remain `rss-pal-dsh` when published.
+### Install from npm
+
+`rss-pal-dsh@0.1.0` is published on [npm](https://www.npmjs.com/package/rss-pal-dsh):
+
+```sh
+dsh plugin --profile web add rss-pal-dsh
+```
+
+Marketplace listings and one-click installation remain subject to each marketplace's checks. New features on GitHub main may precede npm releases; the GitHub install above includes the latest source and committed builds.
+
+## Feedback and public download reports
+
+The sidebar's **反馈与建议 (Feedback)** entry links to [bug reports](https://github.com/morefreeze/dsh-plugin-rss-pal/issues/new?template=bug-report.yml), [feature requests](https://github.com/morefreeze/dsh-plugin-rss-pal/issues/new?template=feature-request.yml) and [existing issues](https://github.com/morefreeze/dsh-plugin-rss-pal/issues). Include plugin/DSH versions, your environment and reproduction steps; redact screenshots and logs. The plugin never uploads diagnostics, subscriptions, articles or conversations automatically.
+
+The [download report](docs/reports/downloads.md) shows npm downloads for the last 30 complete UTC days, GitHub Release asset downloads and stars/forks/issues. GitHub Actions generates it daily and supports manual runs. Failed sources are marked unknown, not zero. **Downloads are not unique users or active users; npm and Release counts must not be added as a user count.** Only the repository-side script queries public statistics; installed plugins remain telemetry-free.
+
+```sh
+node scripts/download-report.mjs
+```
 
 ## Compatibility and runtime requirements
 
