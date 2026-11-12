@@ -49,13 +49,13 @@ dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 
 ### Install from npm
 
-`rss-pal-dsh@0.1.1` is published on [npm](https://www.npmjs.com/package/rss-pal-dsh):
+`rss-pal-dsh@0.1.0` is published on [npm](https://www.npmjs.com/package/rss-pal-dsh):
 
 ```sh
 dsh plugin --profile web add rss-pal-dsh
 ```
 
-Marketplace listings and one-click installation remain subject to each marketplace's checks. New features on GitHub main may precede npm releases; the GitHub install above includes the latest source and committed builds.
+The latest GitHub Release is `0.1.1`; npm publication verification for `0.1.1` is pending. Marketplace listings and one-click installation remain subject to each marketplace's checks. New features on GitHub main may precede npm releases; the GitHub install above includes the latest source and committed builds.
 
 ## Feedback and public download reports
 

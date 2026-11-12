@@ -51,13 +51,13 @@ dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 
 ### 从 npm 安装
 
-`rss-pal-dsh@0.1.1` 已发布到 [npm](https://www.npmjs.com/package/rss-pal-dsh)：
+`rss-pal-dsh@0.1.0` 已发布到 [npm](https://www.npmjs.com/package/rss-pal-dsh)：
 
 ```sh
 dsh plugin --profile web add rss-pal-dsh
 ```
 
-市场的收录及一键安装状态取决于各市场核验。GitHub main 中的新功能可能先于 npm 发布；上方 GitHub 安装方式可取得最新源码及预构建产物。
+GitHub Release 最新版本为 `0.1.1`；npm 的 `0.1.1` 发布验证进行中。市场的收录及一键安装状态取决于各市场核验。GitHub main 中的新功能可能先于 npm 发布；上方 GitHub 安装方式可取得最新源码及预构建产物。
 
 ## 反馈与公开下载报表
 
