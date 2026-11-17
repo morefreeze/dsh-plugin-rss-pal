@@ -1,0 +1,113 @@
+name: Check
+
+on:
+  push:
+  pull_request:
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: check-${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  check:
+    name: ${{ matrix.os }} / Node ${{ matrix.node }} / DSH ${{ matrix.dsh }}
+    runs-on: ${{ matrix.os }}
+    timeout-minutes: 20
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, macos-latest, windows-latest]
+        node: ['22.19.0', '24']
+        dsh: ['0.2.1-rc.5', '0.2.2-rc.3']
+    defaults:
+      run:
+        shell: bash
+    env:
+      NPM_CONFIG_REGISTRY: https://registry.npmjs.org
+    steps:
+      - name: Check out source
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+
+      - name: Set up Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node }}
+          registry-url: https://registry.npmjs.org
+          cache: npm
+
+      - name: Install locked dependencies and native SQLite
+        # Keep install scripts enabled: better-sqlite3 uses prebuild-install/node-gyp.
+        run: npm ci --include=dev --registry=https://registry.npmjs.org
+
+      - name: Install exact official DSH peers
+        # Only the disposable CI checkout's manifest changes, never its lockfile.
+        # --no-save can leave optional peers absent in a locked dependency tree;
+        # --save-dev also replaces the other version's devDependency when switching.
+        env:
+          DSH_VERSION: ${{ matrix.dsh }}
+        run: |
+          npm install --include=dev --save-dev --save-exact --package-lock=false --registry=https://registry.npmjs.org \
+            "@deepseek-ai/dsh-typert-protocol@$DSH_VERSION" \
+            "@deepseek-ai/dsh-tools@$DSH_VERSION" \
+            "@deepseek-ai/dsh-llm@$DSH_VERSION" \
+            "@deepseek-ai/dsh-home-paths@$DSH_VERSION"
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import { readFileSync } from 'node:fs';
+          for (const name of ['dsh-typert-protocol', 'dsh-tools', 'dsh-llm', 'dsh-home-paths']) {
+            const pkg = JSON.parse(readFileSync(`node_modules/@deepseek-ai/${name}/package.json`, 'utf8'));
+            assert.equal(pkg.version, process.env.DSH_VERSION, `${name} version mismatch`);
+            console.log(`${pkg.name}@${pkg.version}`);
+          }
+          NODE
+
+      - name: Verify native SQLite binding
+        run: |
+          node --input-type=module <<'NODE'
+          import assert from 'node:assert/strict';
+          import Database from 'better-sqlite3';
+          const db = new Database(':memory:');
+          assert.equal(db.prepare('SELECT 1 AS value').get().value, 1);
+          db.close();
+          NODE
+
+      - name: Typecheck
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Test plugin on Unix
+        if: runner.os != 'Windows'
+        env:
+          NODE_ENV: test
+        run: npm test 2>&1 | tee plugin-tests.log
+
+      - name: Test plugin on Windows
+        if: runner.os == 'Windows'
+        # npm test contains POSIX inline NODE_ENV assignment; npm uses cmd on Windows.
+        # Step env is inherited by Node, tsx, React and child-process test fixtures.
+        env:
+          NODE_ENV: test
+        run: node --import tsx --test tests/*.test.ts tests/*.test.tsx 2>&1 | tee plugin-tests.log
+
+      - name: Test standalone download report
+        if: ${{ !cancelled() }}
+        run: npm run test:report 2>&1 | tee report-tests.log
+
+      - name: Upload test logs
+        if: ${{ !cancelled() }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: test-logs-${{ matrix.os }}-node-${{ matrix.node }}-dsh-${{ matrix.dsh }}
+          path: |
+            plugin-tests.log
+            report-tests.log
+          if-no-files-found: ignore
+          retention-days: 7

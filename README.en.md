@@ -5,7 +5,7 @@
 **A local-first reading room inside DSH: RSS subscriptions, full-text search, bulk read marking, on-demand AI summaries and a native reading companion.**
 
 - Repository: <https://github.com/morefreeze/dsh-plugin-rss-pal>
-- Plugin package: `rss-pal-dsh` · Version: `0.1.1`
+- Plugin package: `rss-pal-dsh` · Version: `0.1.2`
 - Marketplace category: **Data & Knowledge (knowledge)**
 - License: [MIT](LICENSE)
 - A community plugin, not affiliated with DeepSeek AI.
@@ -41,10 +41,10 @@ The repository includes prebuilt `lib/index.js` and `lib/client.js`, so installi
 
 ### Install a release package
 
-Download `rss-pal-dsh-0.1.1.tgz` from [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases):
+Download `rss-pal-dsh-0.1.2.tgz` from [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases):
 
 ```sh
-dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
+dsh plugin --profile web add ./rss-pal-dsh-0.1.2.tgz
 ```
 
 ### Install from npm
@@ -55,7 +55,7 @@ dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 dsh plugin --profile web add rss-pal-dsh
 ```
 
-The latest GitHub Release is `0.1.1`; npm publication verification for `0.1.1` is pending. Marketplace listings and one-click installation remain subject to each marketplace's checks. New features on GitHub main may precede npm releases; the GitHub install above includes the latest source and committed builds.
+The latest GitHub Release is `0.1.2`; npm publication verification for `0.1.2` is pending. Marketplace listings and one-click installation remain subject to each marketplace's checks. New features on GitHub main may precede npm releases; the GitHub install above includes the latest source and committed builds.
 
 ## Feedback and public download reports
 
@@ -72,7 +72,7 @@ node scripts/download-report.mjs
 | Item | Requirement / verification scope |
 | --- | --- |
 | DSH profile | `web` |
-| Declared DSH versions | `0.2.1-rc.5`, `0.2.2-rc.1` |
+| Declared DSH range | `>=0.2.1-rc.5 <0.3.0-0` (host matches prereleases explicitly) |
 | Runtime-tested environment | macOS, DeepSeek Harness `0.2.1-rc.5` Web |
 | Node.js | `>=22.19.0`; the selected DSH release may require a newer version |
 | Database | Local SQLite through the `better-sqlite3` native module |
@@ -97,11 +97,17 @@ Agent reads do not count toward human reading time. The summary tool should be i
 
 ## Development and testing
 
-Install development dependencies:
+The four official development peers are pinned to `0.2.2-rc.3`, so a clean install is sufficient. Keep native dependency install scripts enabled:
 
 ```sh
-npm ci --include=dev
+npm ci --include=dev --registry=https://registry.npmjs.org
+npm run check
+npm run test:report
 ```
+
+[Public CI](https://github.com/morefreeze/dsh-plugin-rss-pal/actions/workflows/check.yml) covers Ubuntu/macOS/Windows, Node 22.19/24 and DSH peers 0.2.1-rc.5/0.2.2-rc.3. Actual workflow results determine which environments passed. Windows uses the CI step's NODE_ENV environment and direct `node --import tsx --test` command instead of POSIX inline variable assignment.
+
+The native SQLite dependency remains; the plugin does not change user build policy. Approve only better-sqlite3 when the manager reports build-blocked. See [build approval, manual repair and FTS5 verification](docs/native-build.md).
 
 The `@deepseek-ai` runtime dependencies are provided by DSH. For development, also install the following four packages at the same version as your target DSH release:
 
@@ -121,7 +127,7 @@ The Host entry is the Cordis `RssPalService` plugin class. The Web Client export
 
 ## Verification
 
-Current regression baseline: **88 passing tests**, covering transactional read ranges, filter isolation, pagination/filter navigation during pending writes, reading tracking, explicit summary generation and model selection. Desktop and mobile-width layouts, single-article read-state RPC and the native reading companion have been verified in actual DSH Web.
+Current local regression baseline: **90 plugin tests and 11 report tests passing** (macOS, Node 22.19, DSH 0.2.2-rc.3 peers; not a new full-host Web acceptance run), covering transactional read ranges, filter isolation, pagination/filter navigation during pending writes, reading tracking, explicit summary generation and model selection. Desktop and mobile-width layouts, single-article read-state RPC and the native reading companion have been verified in actual DSH Web.
 
 ## Acknowledgments
 

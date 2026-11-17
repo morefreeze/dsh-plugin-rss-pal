@@ -1,6 +1,6 @@
 {
   "name": "rss-pal-dsh",
-  "version": "0.1.1",
+  "version": "0.1.2",
   "private": false,
   "author": "MoreFreeze",
   "repository": {
@@ -35,6 +35,7 @@
     "README.md",
     "README.en.md",
     "docs/screenshots",
+    "docs/native-build.md",
     "LICENSE"
   ],
   "scripts": {
@@ -47,7 +48,7 @@
   },
   "engines": {
     "node": ">=22.19.0",
-    "dsh": "0.2.1-rc.5 || 0.2.2-rc.1"
+    "dsh": ">=0.2.1-rc.5 <0.3.0-0"
   },
   "dsh": {
     "bundle": {
@@ -69,10 +70,10 @@
     }
   },
   "peerDependencies": {
-    "@deepseek-ai/dsh-typert-protocol": "0.2.1-rc.5 || 0.2.2-rc.1",
-    "@deepseek-ai/dsh-tools": "0.2.1-rc.5 || 0.2.2-rc.1",
-    "@deepseek-ai/dsh-llm": "0.2.1-rc.5 || 0.2.2-rc.1",
-    "@deepseek-ai/dsh-home-paths": "0.2.1-rc.5 || 0.2.2-rc.1"
+    "@deepseek-ai/dsh-typert-protocol": ">=0.2.1-rc.5 <0.3.0-0",
+    "@deepseek-ai/dsh-tools": ">=0.2.1-rc.5 <0.3.0-0",
+    "@deepseek-ai/dsh-llm": ">=0.2.1-rc.5 <0.3.0-0",
+    "@deepseek-ai/dsh-home-paths": ">=0.2.1-rc.5 <0.3.0-0"
   },
   "peerDependenciesMeta": {
     "@deepseek-ai/dsh-typert-protocol": {
@@ -112,6 +113,12 @@
     "remark-gfm": "^4.0.1",
     "rehype-highlight": "^7.0.2",
     "remark-math": "^6.0.0",
-    "rehype-katex": "^7.0.1"
+    "rehype-katex": "^7.0.1",
+    "@deepseek-ai/dsh-typert-protocol": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-tools": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-llm": "0.2.2-rc.3",
+    "@deepseek-ai/dsh-home-paths": "0.2.2-rc.3",
+    "semver": "^7.7.3",
+    "@types/semver": "^7.7.1"
   }
 }

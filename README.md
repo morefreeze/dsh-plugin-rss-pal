@@ -7,7 +7,7 @@
 A local-first RSS/Atom reader for DeepSeek Harness, with full-text search, on-demand AI summaries and a native reading companion.
 
 - 仓库：<https://github.com/morefreeze/dsh-plugin-rss-pal>
-- 插件包名：`rss-pal-dsh` · 版本：`0.1.1`
+- 插件包名：`rss-pal-dsh` · 版本：`0.1.2`
 - 市场能力分类：**Data & Knowledge (knowledge) / 数据与知识**
 - 许可证：[MIT](LICENSE)
 - 社区插件，与 DeepSeek AI 官方无隶属关系。
@@ -43,10 +43,10 @@ dsh plugin --profile web add github:morefreeze/dsh-plugin-rss-pal
 
 ### 发布包安装
 
-从 [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases) 下载 `rss-pal-dsh-0.1.1.tgz`：
+从 [GitHub Releases](https://github.com/morefreeze/dsh-plugin-rss-pal/releases) 下载 `rss-pal-dsh-0.1.2.tgz`：
 
 ```sh
-dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
+dsh plugin --profile web add ./rss-pal-dsh-0.1.2.tgz
 ```
 
 ### 从 npm 安装
@@ -57,7 +57,7 @@ dsh plugin --profile web add ./rss-pal-dsh-0.1.1.tgz
 dsh plugin --profile web add rss-pal-dsh
 ```
 
-GitHub Release 最新版本为 `0.1.1`；npm 的 `0.1.1` 发布验证进行中。市场的收录及一键安装状态取决于各市场核验。GitHub main 中的新功能可能先于 npm 发布；上方 GitHub 安装方式可取得最新源码及预构建产物。
+GitHub Release 最新版本为 `0.1.2`；npm 的 `0.1.2` 发布验证进行中。市场的收录及一键安装状态取决于各市场核验。GitHub main 中的新功能可能先于 npm 发布；上方 GitHub 安装方式可取得最新源码及预构建产物。
 
 ## 反馈与公开下载报表
 
@@ -74,7 +74,7 @@ node scripts/download-report.mjs
 | 项目 | 要求 / 验证范围 |
 | --- | --- |
 | DSH profile | `web` |
-| DSH 版本声明 | `0.2.1-rc.5`、`0.2.2-rc.1` |
+| DSH 版本声明 | `>=0.2.1-rc.5 <0.3.0-0`（宿主包含预发布版本匹配） |
 | 实机验收 | macOS、DeepSeek Harness `0.2.1-rc.5` Web |
 | Node.js | `>=22.19.0`；使用的 DSH 版本可能要求更高版本 |
 | 数据库 | 本地 SQLite / `better-sqlite3` 原生模块 |
@@ -99,11 +99,17 @@ Agent 阅读不会计入人类阅读时长。总结工具只在用户明确要�
 
 ## 开发与测试
 
-先安装开发依赖：
+官方四个开发依赖已固定到 `0.2.2-rc.3`，一次安装即可复现检查。依赖安装需允许 `better-sqlite3` 的正常原生构建：
 
 ```sh
-npm ci --include=dev
+npm ci --include=dev --registry=https://registry.npmjs.org
+npm run check
+npm run test:report
 ```
+
+[公开 CI](https://github.com/morefreeze/dsh-plugin-rss-pal/actions/workflows/check.yml)覆盖 Ubuntu/macOS/Windows、Node 22.19/24、DSH peers `0.2.1-rc.5`/`0.2.2-rc.3`。矩阵是否通过以工作流实际结果为准。Windows 使用 CI 中的 `NODE_ENV: test` 与 `node --import tsx --test` 命令，不使用 POSIX 内联变量语法。
+
+保留原生 SQLite，不自动放宽用户构建策略；商店提示 `build-blocked` 时仅批准该依赖。[构建审批、手动修复与 FTS5 验证步骤](docs/native-build.md)。
 
 宿主 `@deepseek-ai` 依赖由 DSH 提供，开发时还需在当前项目安装与目标 DSH 同版的 `dsh-tools`、`dsh-llm`、`dsh-home-paths`、`dsh-typert-protocol` 四个包：
 
@@ -123,7 +129,7 @@ Host 入口为 Cordis `RssPalService` 插件类；Web Client 在 `src/client/ind
 
 ## 验证
 
-当前回归：**88 项通过**，包括事务范围已读、筛选隔离、待写入期间翻页 / 切筛选竞态、阅读追踪、手动总结与模型选择。已在真实 DSH Web 验证桌面和手机布局、单篇已读 RPC 与原生伴读。
+当前本地回归：**90 项插件测试 + 11 项报告测试通过**（macOS、Node 22.19、DSH `0.2.2-rc.3` peers；不是新宿主 Web 全流程验收），包括事务范围已读、筛选隔离、待写入期间翻页 / 切筛选竞态、阅读追踪、手动总结与模型选择。已在真实 DSH Web 验证桌面和手机布局、单篇已读 RPC 与原生伴读。
 
 ## 致谢
 
