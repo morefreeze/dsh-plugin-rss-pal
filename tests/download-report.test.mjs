@@ -113,7 +113,7 @@ test('valid zero counts and empty releases remain measured zero, not unknown', a
 });
 
 test('workflow is cron/manual only, grants only contents write and stages report allowlist', async () => {
-  const workflow = await readFile(new URL('../.github/workflows/download-report.yml', import.meta.url), 'utf8');
+  const workflow = (await readFile(new URL('../.github/workflows/download-report.yml', import.meta.url), 'utf8')).replace(/\r\n/g, '\n');
   assert.match(workflow, /cron: '23 7 \* \* \*'/);
   assert.match(workflow, /workflow_dispatch:/);
   assert.doesNotMatch(workflow, /^\s+(push|pull_request|workflow_run):/m);
