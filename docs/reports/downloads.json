@@ -1,12 +1,12 @@
 {
   "schemaVersion": 1,
-  "snapshotDay": "2026-11-19",
-  "collectedAt": "2026-11-19T16:40:30.996Z",
+  "snapshotDay": "2026-11-20",
+  "collectedAt": "2026-11-20T16:16:14.509Z",
   "package": "rss-pal-dsh",
   "repository": "morefreeze/dsh-plugin-rss-pal",
   "window": {
-    "start": "2026-10-20",
-    "end": "2026-11-18",
+    "start": "2026-10-21",
+    "end": "2026-11-19",
     "days": 30
   },
   "interpretation": {
@@ -18,12 +18,8 @@
   },
   "npm": {
     "status": "ok",
-    "totalDownloads": 713,
+    "totalDownloads": 752,
     "daily": [
-      {
-        "day": "2026-10-20",
-        "downloads": 0
-      },
       {
         "day": "2026-10-21",
         "downloads": 0
@@ -139,6 +135,10 @@
       {
         "day": "2026-11-18",
         "downloads": 44
+      },
+      {
+        "day": "2026-11-19",
+        "downloads": 39
       }
     ]
   },
@@ -151,7 +151,7 @@
     },
     "releases": {
       "status": "ok",
-      "totalAssetDownloads": 149,
+      "totalAssetDownloads": 161,
       "assets": [
         {
           "id": 757530647,
@@ -169,7 +169,7 @@
           "id": 739557924,
           "release": "v0.1.1",
           "name": "rss-pal-dsh-0.1.1.tgz",
-          "downloadCount": 121
+          "downloadCount": 133
         },
         {
           "id": 739557919,
